@@ -24,7 +24,7 @@ function doRequest(method, url, options) {
   });
   var res = spawnSync(process.execPath, [require.resolve('./lib/worker.js')], {input: req});
   if (res.status !== 0) {
-    throw new Error(res.stderr.toString());
+    throw new Error(res && res.stderr && res.stderr.toString());
   }
   if (res.error) {
     if (typeof res.error === 'string') res.error = new Error(res.error);
